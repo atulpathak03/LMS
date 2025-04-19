@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/cli.css">
+</head>
+<body>
+    <%- include('partials/header-i.ejs') %>
+<div class="courselayout-y">
+    <div class="side-bar-y">
+        <a href="/course-overview/<%= course.id %>" class="overview-y course-part-y">Overview</a>
+        <% sections.forEach((section) => { %>
+            <a href="/course-section/<%= section.section_id %>" class="section course-part-y"><%= section.section_name %></a>
+        <% }) %>
+    </div>
+    
+    
+    <div class="main-content-y">
+        <div class="left-main-content-y">
+            <div class="lfmc-2-y">
+                <div class="lfc-heading-y">
+                    <p><%= course.title %></p>
+                </div>
+                <div class="lfc-subheading-y">
+                    <p><%= course.subheading %></p>
+                </div>
+                <div class="lfc-rating-y">
+                    <p>Rating: <%= course.rating %></p>
+                </div>
+                <div class="lfc-level-y">
+                    <p>Level: <%= course.level %></p>
+                </div>
+
+                <div class="lfc-description-y">
+                    <p><%= course.description %></p>
+                </div>
+                <div class="lfc-description-y">
+                    <p>Category: <%= course.category %></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-main-content-y">
+            <div class="rfc-main-2-y">
+                <div class="rfc-photo-y">
+                    <% if (course.thumbnail) { %>
+                        <img src="<%= course.thumbnail %>" alt="Course Image" width="300px">
+                    <% } else { %>
+                        <p>No image available</p> 
+                    <% } %>
+                </div>
+                <div class="rfc-price-y">$<%= course.price %></div>
+                <div class="rfc-btn-y">
+                    <form action="/publish" method="POST">
+                        <input type="hidden" name="courseId" value="<%= course.id %>">
+                        <button type="submit" class="rfc-cart">
+                            <%= course.published ? 'Unpublish' : 'Publish' %>
+                        </button>
+                    </form>
+                    
+                    <form action="/delete" method="POST" onsubmit="return confirmDelete();">
+                        <input type="hidden" name="courseId" value="<%= course.id %>">
+                        <button type="submit" class="rfc-wishlist">Delete</button>
+                    </form>
+                    <form action="/add-section" method="GET">
+                        <button type="submit" class="rfc-buy">Add Section</button>
+                    </form>
+<a href="/chat/<%= course.id %>/<%= user_id %>/instructor" class="chat-button">
+                        <button>Join Chat</button>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('partials/footer-i') %>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this course?");
+    }
+</script>
+
+</body>
+</html>

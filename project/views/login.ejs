@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/styles/login.css">
+</head>
+<body>
+    <div class="login-page">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/logincourse" method="POST">
+            <label for="role" >I am a:</label>
+    <div>
+        <input type="radio" id="student" name="role" value="student" checked >
+        <label for="student" class="option">Student</label>
+        
+        <input type="radio" id="instructor" name="role" value="instructor">
+        <label for="instructor" class="option">Instructor</label>
+    </div>
+
+            
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="data-entry" autocomplete="off" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="data-entry" name="password" required>
+                
+            </div>
+            
+            <button type="submit">Login</button>
+            <p class="signup-link">Don't have an account? <a href="/signup">Sign up</a></p>
+        </form>
+        <hr>
+        <a href="/auth/google" class="google-btn">
+            <img src="/images/googlelogo.png" alt="Google logo">
+            Login with Google
+        </a>
+    </div>
+    </div>
+</body>
+</html>

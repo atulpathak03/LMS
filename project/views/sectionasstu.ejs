@@ -1,0 +1,44 @@
+<head>
+    <link rel="stylesheet" href="/styles/sectionasstu.css"> 
+</head>
+<body>
+    
+    
+<div class="section-view-y">
+    <div class="side-bar-y">
+        <a href="/cosab/<%= courseId %>" class="overview-y course-part-y">Overview</a>
+        <% sections.forEach((s) => { %>
+            <a href="/cs-stu/<%= section.section_id %>" class="section course-part-y"><%= s.section_name %></a>
+        <% }) %>
+    </div>
+    <div class="container-y">
+        <div class="container-txt-y">
+            <h1 class="title-y"><%= section.section_name %></h1>
+            <p class="description-y"><%= section.section_description %></p>
+        </div>
+        <a href="<%=section.pdf_link%>" class="download-button-y" target="_blank">Resources</a>
+        
+        <div class="video-container-y">
+            <h2>Watch Lecture:</h2>
+            <video class="video-player-y" controls controlsList="nodownload">
+                <source src="<%= section.video_path %>" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <form action="/update-section-status" method="POST">
+            <input type="hidden" name="sectionId" value="<%= section.section_id %>">
+            <input type="hidden" name="courseId" value="<%= courseId %>">
+            <label>
+                <input type="checkbox" class="checkbox-y" name="isDone" value="true" 
+                    onchange="this.form.submit()"
+                    <% if (isDone) { %> checked <% } %>
+                > Done
+            </label>
+        </form>
+        
+        
+        
+        
+    </div>
+</div>
+</body>
